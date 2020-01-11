@@ -6,10 +6,10 @@ function indexRouteHandler(req, res) {
   const skills = db.getSkills();
   const isUserAuth = db.isUserAuth();
 
-  return res.render('./pages/index', { 
+  return res.render('./pages/index', {
     products,
     skills,
-    userauth: isUserAuth, 
+    userauth: isUserAuth,
     msgemail: flashStatus.length ? flashStatus : null
   });
 }
@@ -17,7 +17,7 @@ function indexRouteHandler(req, res) {
 function registerGETHandlers(router) {
   router.get('/', indexRouteHandler);
   router.get('/index', indexRouteHandler);
-  
+
   router.get('/login', function (req, res) {
     const flashStatus = req.flash('loginStatus');
     const isUserAuth = db.isUserAuth();
@@ -26,8 +26,8 @@ function registerGETHandlers(router) {
       return res.redirect('/admin');
     }
 
-    return res.render('./pages/login', { 
-      msglogin: flashStatus.length ? flashStatus : null 
+    return res.render('./pages/login', {
+      msglogin: flashStatus.length ? flashStatus : null
     });
   });
 
@@ -37,19 +37,28 @@ function registerGETHandlers(router) {
     req.flash('loginStatus', 'Всего хорошего! :)');
     return res.redirect('/login');
   })
-  
+
   router.get('/admin', function (req, res) {
     const flashLoginStatus = req.flash('loginStatus');
     const flashSkillsStatus = req.flash('skillsStatus');
     const flashUploadStatus = req.flash('uploadStatus');
     const isUserAuth = db.isUserAuth();
 
+    const skills = db.getSkills();
+
+    console.log('skills', skills);
+
     if (!isUserAuth) {
       req.flash('loginStatus', 'Пожалуйста, авторизируйтесь!');
       return res.redirect('/login');
     }
 
-    return res.render('./pages/admin', { 
+    return res.render('./pages/admin', {
+      a: 12,
+      b: 76,
+      c: 30,
+      d: 20,
+      skills,
       msgauth: flashLoginStatus.length ? flashLoginStatus : null,
       msgskill: flashSkillsStatus.length ? flashSkillsStatus : null,
       msgfile: flashUploadStatus.length ? flashUploadStatus : null
