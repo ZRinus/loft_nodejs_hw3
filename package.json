@@ -16,7 +16,7 @@
     "express-fileupload": "^0.4.0",
     "express-session": "^1.15.6",
     "lowdb": "^1.0.0",
-    "pug": "^2.0.3"
+    "pug": "^3.0.1"
   },
   "devDependencies": {
     "nodemon": "^1.18.4"
